@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<!--A:HEAD-->
+<title>호랑이 마왕군 운영실</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+<style>
+/* Layout: phone-first single column app shell — sticky header, card stack, fixed bottom tab bar */
+:root{
+  --bg:#f6f1e8;
+  --surface:#fffdf8;
+  --surface2:#f1e9da;
+  --text:#2c2418;
+  --text2:#8b7f6c;
+  --line:#e7ddca;
+  --brand:#df661d;
+  --brand-deep:#b04a0e;
+  --brand-soft:#fbe8d6;
+  --on-brand:#ffffff;
+  --ok:#1f8a5f;
+  --ok-soft:#e1f2e9;
+  --bad:#cf4536;
+  --bad-soft:#fbe6e2;
+  --warn:#b97a10;
+  --warn-soft:#faeed3;
+  --hero1:#ff9a43;
+  --hero2:#e0661c;
+  --hero3:#9c3c06;
+  --nav-bg:rgba(255,253,248,.95);
+  --shadow:0 10px 26px rgba(60,42,20,.09);
+  --font-disp:"Jua","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --font-body:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#191410;
+    --surface:#221c14;
+    --surface2:#2d251a;
+    --text:#f3ebdd;
+    --text2:#a29683;
+    --line:#3a3122;
+    --brand:#f58434;
+    --brand-deep:#ffb277;
+    --brand-soft:#3b2a17;
+    --on-brand:#241303;
+    --ok:#4cc08d;
+    --ok-soft:#1c3a2c;
+    --bad:#f57e6e;
+    --bad-soft:#452622;
+    --warn:#e2a844;
+    --warn-soft:#3e3118;
+    --nav-bg:rgba(30,24,17,.95);
+    --shadow:0 10px 26px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#191410;
+  --surface:#221c14;
+  --surface2:#2d251a;
+  --text:#f3ebdd;
+  --text2:#a29683;
+  --line:#3a3122;
+  --brand:#f58434;
+  --brand-deep:#ffb277;
+  --brand-soft:#3b2a17;
+  --on-brand:#241303;
+  --ok:#4cc08d;
+  --ok-soft:#1c3a2c;
+  --bad:#f57e6e;
+  --bad-soft:#452622;
+  --warn:#e2a844;
+  --warn-soft:#3e3118;
+  --nav-bg:rgba(30,24,17,.95);
+  --shadow:0 10px 26px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:15px;
+  line-height:1.55;
+  -webkit-tap-highlight-color:transparent;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none;padding:0}
+img{max-width:100%}
+a{color:var(--brand);text-decoration:none}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.wrap{max-width:620px;margin:0 auto;padding:0 16px 132px}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr-in{max-width:620px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.hdr .logo{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--hero1),var(--hero3));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:var(--shadow)}
+.hdr .tt{min-width:0;flex:1}
+.hdr h1{margin:0;font-family:var(--font-disp);font-weight:400;font-size:19px;letter-spacing:.2px;line-height:1.2}
+.hdr .sub{font-size:11.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr .sub b{color:var(--bad);font-weight:600}
+.weekchip{flex-shrink:0;background:var(--brand-soft);color:var(--brand-deep);font-weight:700;font-size:12.5px;padding:7px 12px;border-radius:999px}
+
+/* ---------- demo banner ---------- */
+.demobar{background:var(--warn-soft);color:var(--warn);font-size:12.5px;padding:8px 16px;text-align:center;border-bottom:1px solid var(--line)}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:14px}
+.card h2{margin:0 0 4px;font-size:16px;font-weight:800}
+.card .desc{font-size:12.5px;color:var(--text2);margin:0 0 10px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-radius:22px;margin-top:14px;padding:22px 20px 18px;color:#fff;background:linear-gradient(140deg,var(--hero1),var(--hero2) 55%,var(--hero3));box-shadow:var(--shadow)}
+.hero .mascot{position:absolute;right:6px;top:10px;font-size:84px;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));transform:rotate(6deg)}
+.hero .greet{font-size:13px;opacity:.92}
+.hero .yr{font-family:var(--font-disp);font-size:17px;opacity:.95;margin-top:10px}
+.hero .big{font-family:var(--font-disp);font-size:42px;line-height:1.05;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hero .quip{font-size:13px;margin-top:6px;opacity:.95}
+.hero .dates{display:flex;gap:8px;margin-top:16px}
+.hero .dcell{flex:1;background:rgba(20,8,0,.28);border-radius:14px;padding:9px 6px;text-align:center;backdrop-filter:blur(2px)}
+.hero .dcell .l{font-size:11.5px;opacity:.85}
+.hero .dcell .v{font-weight:800;font-size:14px;margin-top:2px}
+
+/* ---------- call banner & notice ---------- */
+.callbar{margin-top:14px;background:var(--brand-soft);border:1px solid var(--brand);border-radius:14px;padding:10px 14px;font-size:13px;color:var(--brand-deep);display:flex;gap:8px;align-items:flex-start}
+.notice{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.notice summary{list-style:none;display:flex;align-items:center;gap:8px;padding:12px 14px;font-weight:700;font-size:13.5px;cursor:pointer}
+.notice summary::-webkit-details-marker{display:none}
+.notice summary .arr{margin-left:auto;color:var(--text2);transition:transform .2s}
+.notice[open] summary .arr{transform:rotate(90deg)}
+.notice .nbody{padding:0 14px 12px;font-size:13.5px;color:var(--text);white-space:pre-wrap;border-top:1px dashed var(--line);padding-top:10px}
+
+/* ---------- chips / filters ---------- */
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--text2)}
+.chip .n{font-weight:800;margin-left:3px}
+.chip.on{background:var(--text);border-color:var(--text);color:var(--bg)}
+.chip.ok-on{background:var(--ok);border-color:var(--ok);color:#fff}
+.chip.bad-on{background:var(--bad);border-color:var(--bad);color:#fff}
+.selwrap{margin-left:auto}
+select.sel{appearance:none;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 28px 7px 14px;font-size:13px;font-weight:600;color:var(--text2);background-image:linear-gradient(45deg,transparent 50%,var(--text2) 50%),linear-gradient(135deg,var(--text2) 50%,transparent 50%);background-position:calc(100% - 16px) 55%,calc(100% - 11px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+
+/* ---------- contribution table ---------- */
+.tblwrap{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.tscroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th{font-size:11.5px;color:var(--text2);font-weight:600;text-align:left;padding:10px 7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 7px;font-size:13.5px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+td.nick{font-weight:700;position:relative;padding-left:13px;max-width:112px;overflow:hidden;text-overflow:ellipsis}
+td.nick::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:4px;border-radius:0 4px 4px 0}
+tr.done td.nick::before{background:var(--ok)}
+tr.miss td.nick::before{background:var(--bad)}
+.lvb{display:inline-block;background:var(--surface2);color:var(--text2);border-radius:8px;padding:2px 7px;font-size:11.5px;font-weight:700}
+.acc{color:var(--text2);font-size:12.5px}
+.acc b{color:var(--text);font-size:13.5px}
+td.diff{font-weight:800}
+tr.done td.diff{color:var(--ok)}
+tr.miss td.diff{color:var(--bad)}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%}
+.dot.ok{background:var(--ok)}
+.dot.bad{background:var(--bad)}
+.warnb{display:inline-block;background:var(--warn-soft);color:var(--warn);font-weight:800;font-size:12px;border-radius:8px;padding:2px 8px}
+.thr{font-size:12px;color:var(--text2);margin-top:10px;text-align:center}
+
+/* ---------- weekly chart & matrix ---------- */
+.chart text{fill:var(--text2);font-size:11px;font-family:var(--font-body)}
+.chart .val{fill:var(--text);font-weight:700;font-size:11.5px}
+.chart .bar{fill:var(--brand)}
+.chart .axis{stroke:var(--line)}
+.mx td,.mx th{text-align:center}
+.mx td:first-child,.mx th:first-child{text-align:left}
+.cellv{display:inline-block;min-width:52px;border-radius:9px;padding:3px 8px;font-size:12.5px;font-weight:700}
+.cellv.ok{background:var(--ok-soft);color:var(--ok)}
+.cellv.bad{background:var(--bad-soft);color:var(--bad)}
+.cellv.na{color:var(--text2);font-weight:500}
+
+/* ---------- member cards ---------- */
+.mcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-top:12px;width:100%;text-align:left;display:block;transition:transform .12s}
+.mcard:active{transform:scale(.985)}
+.mcard .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mcard .nm{font-weight:800;font-size:15.5px}
+.roleb{font-size:11px;font-weight:800;border-radius:8px;padding:2.5px 8px}
+.roleb.r0{background:var(--brand);color:var(--on-brand)}
+.roleb.r1{background:var(--brand-soft);color:var(--brand-deep)}
+.roleb.r2{background:var(--surface2);color:var(--text2)}
+.mcard .meta{font-size:12.5px;color:var(--text2);margin-top:3px}
+.mcard .empty{color:var(--text2);font-size:13px;margin-top:8px;text-align:center;padding:10px 0;border:1.5px dashed var(--line);border-radius:12px}
+.kv{display:flex;justify-content:space-between;gap:10px;background:var(--surface2);border-radius:12px;padding:9px 12px;margin-top:8px;font-size:13.5px}
+.kv .k{color:var(--text2)}
+.kv .v{font-weight:800}
+.dealers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.dealer{background:var(--surface2);border-radius:12px;padding:8px 6px;text-align:center}
+.dealer .dn{font-weight:800;font-size:12.5px}
+.dealer .dl{font-size:11px;color:var(--text2);margin-top:2px}
+.mcard .upd{font-size:11px;color:var(--text2);text-align:right;margin-top:10px}
+
+/* ---------- share (videos & tips) ---------- */
+.subtabs{display:flex;background:var(--surface2);border-radius:14px;padding:4px;margin-top:14px}
+.subtabs button{flex:1;border-radius:11px;padding:9px 0;font-weight:700;font-size:13.5px;color:var(--text2)}
+.subtabs button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.addbtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:14px;background:var(--brand);color:var(--on-brand);font-weight:800;font-size:14.5px;border-radius:16px;padding:14px 0;box-shadow:var(--shadow)}
+.hint{font-size:12px;color:var(--text2);margin-top:8px;text-align:center}
+.vthumb{position:relative;display:block;margin-top:10px;border-radius:14px;overflow:hidden;background:var(--surface2);aspect-ratio:16/9;max-width:100%}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vthumb .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;background:rgba(0,0,0,.25);text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.vthumb iframe{width:100%;height:100%;border:0;display:block}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-top:12px}
+.pcard .pt{font-weight:800;font-size:14.5px}
+.pcard .pm{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:12px;color:var(--text2)}
+.modeb{background:var(--brand-soft);color:var(--brand-deep);font-weight:700;border-radius:8px;padding:2px 8px;font-size:11.5px}
+.pcard .pb{font-size:13.5px;margin-top:8px;white-space:pre-wrap;word-break:break-word}
+.pcard .pb.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pacts{display:flex;gap:6px;margin-left:auto}
+.iconb{width:32px;height:32px;border-radius:10px;background:var(--surface2);color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.linkout{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:var(--surface2);border-radius:12px;padding:9px 14px;font-weight:700;font-size:13px;color:var(--brand-deep)}
+
+/* ---------- video comments & custom tips ---------- */
+.tob{background:var(--brand);color:var(--on-brand);font-weight:800;border-radius:8px;padding:2px 9px;font-size:11.5px}
+.vcm{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.cmtoggle{font-size:12.5px;font-weight:700;color:var(--text2)}
+.cmlist{margin-top:8px;display:flex;flex-direction:column;gap:7px}
+.cmempty{font-size:12.5px;color:var(--text2)}
+.cmrow{display:flex;justify-content:space-between;gap:8px;background:var(--surface2);border-radius:10px;padding:7px 10px;font-size:13px;align-items:baseline}
+.cmrow .cmtxt{min-width:0;word-break:break-word}
+.cmmeta{font-size:11px;color:var(--text2);white-space:nowrap;flex-shrink:0}
+.cmdel{color:var(--bad);font-size:11px;font-weight:700}
+.cmform{display:grid;grid-template-columns:90px 1fr 54px;gap:6px;margin-top:4px}
+.cmform .inp{padding:8px 10px;font-size:13px}
+.cmgo{background:var(--brand);color:var(--on-brand);border-radius:11px;font-weight:800;font-size:12.5px}
+
+/* ---------- comments ---------- */
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-top:12px}
+.ccard .ct{font-size:14px;white-space:pre-wrap;word-break:break-word}
+.ccard .cm{display:flex;align-items:center;margin-top:10px;font-size:12px;color:var(--text2)}
+
+/* ---------- empty state ---------- */
+.emptybox{text-align:center;padding:36px 16px;color:var(--text2);font-size:13.5px}
+.emptybox .big{font-size:40px;margin-bottom:8px}
+
+/* ---------- bottom nav ---------- */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.nav-in{max-width:620px;margin:0 auto;display:flex}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 7px;font-size:10.5px;font-weight:700;color:var(--text2)}
+.nav button svg{width:22px;height:22px}
+.nav button.on{color:var(--brand)}
+
+/* ---------- FABs ---------- */
+.fabs{position:fixed;right:max(16px,calc(50% - 294px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.fab-call{width:58px;height:58px;border-radius:50%;background:linear-gradient(140deg,var(--hero1),var(--hero3));color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(160,70,10,.45)}
+.fab-gear{width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--text2);font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+
+/* ---------- modal ---------- */
+.ovl{position:fixed;inset:0;z-index:100;background:rgba(25,15,5,.45);display:flex;align-items:flex-end;justify-content:center}
+@media (min-width:560px){.ovl{align-items:center}}
+.sheet{background:var(--surface);width:100%;max-width:560px;border-radius:22px 22px 0 0;max-height:88dvh;display:flex;flex-direction:column;animation:up .22s ease}
+@media (min-width:560px){.sheet{border-radius:22px;max-height:86dvh}}
+@keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
+.sheet .shd{display:flex;align-items:center;gap:8px;padding:16px 18px 10px}
+.sheet .shd h3{margin:0;font-size:16.5px;font-weight:800;flex:1}
+.sheet .x{width:32px;height:32px;border-radius:50%;background:var(--surface2);color:var(--text2);font-size:15px;display:flex;align-items:center;justify-content:center}
+.sheet .sbody{padding:2px 18px 18px;overflow-y:auto}
+.frow{margin-top:12px}
+.frow label{display:block;font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:6px}
+.inp,textarea.inp{width:100%;background:var(--surface2);border:1.5px solid transparent;border-radius:13px;padding:11px 13px;font-size:14.5px}
+.inp:focus{outline:none;border-color:var(--brand);background:var(--surface)}
+textarea.inp{resize:vertical;min-height:90px}
+.btn{display:block;width:100%;text-align:center;background:var(--brand);color:var(--on-brand);font-weight:800;font-size:15px;border-radius:14px;padding:13px 0;margin-top:16px}
+.btn.sub{background:var(--surface2);color:var(--text)}
+.btn.danger{background:var(--bad-soft);color:var(--bad)}
+.btn:disabled{opacity:.45;cursor:default}
+.btnrow{display:flex;gap:8px}
+.btnrow .btn{flex:1}
+.mnote{font-size:12px;color:var(--text2);margin-top:10px;line-height:1.5}
+.preset{display:flex;flex-wrap:wrap;gap:8px}
+.preset button{background:var(--surface2);border-radius:999px;padding:8px 13px;font-size:13px;font-weight:600}
+.preset button.on{background:var(--brand);color:var(--on-brand)}
+.drow{display:grid;grid-template-columns:1.4fr 1fr 1fr 34px;gap:6px;margin-top:6px;align-items:center}
+.drow .del{color:var(--bad);font-size:16px;text-align:center}
+.arow{display:grid;grid-template-columns:1.5fr 1fr .9fr 56px;gap:6px;margin-top:6px;align-items:center}
+.wrow{display:grid;grid-template-columns:1.2fr 1fr 1fr .7fr;gap:6px;margin-top:6px;align-items:center;font-size:13px}
+.wrow .wn{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.admsec{border-top:1px dashed var(--line);margin-top:18px;padding-top:14px}
+.admsec h4{margin:0 0 4px;font-size:14px}
+.admsec .small{font-size:12px;color:var(--text2);margin:0 0 6px}
+.wklist{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.wkitem{display:flex;align-items:center;gap:8px;background:var(--surface2);border-radius:12px;padding:9px 12px;font-size:13.5px}
+.wkitem b{flex:1}
+.smallbtn{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:5px 10px;font-size:12.5px;font-weight:700;color:var(--text2)}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:200;background:var(--text);color:var(--bg);font-size:13.5px;font-weight:600;border-radius:999px;padding:10px 18px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s}
+.toast.show{opacity:1}
+.secthead{margin:22px 0 0;font-size:13px;font-weight:800;color:var(--text2);letter-spacing:.4px}
+</style>
+<!--/A:HEAD-->
+</head>
+<body>
+<script src="firebase-config.js"></script>
+<!--A:BODY-->
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="logo">🐯</div>
+    <div class="tt">
+      <h1 id="siteTitle">호랑이 마왕군 운영실</h1>
+      <div class="sub">협동타워디펜스 · 오늘도 으르렁대며 굴러가는 호랑이 마왕군 <b>🧡</b></div>
+    </div>
+    <div class="weekchip" id="hdrWeek">—</div>
+  </div>
+</header>
+<div class="demobar" id="demobar" hidden></div>
+
+<main class="wrap">
+  <div id="view"></div>
+</main>
+
+<div class="fabs">
+  <button class="fab-gear" id="fabGear" aria-label="관리자 메뉴">⚙️</button>
+  <button class="fab-call" id="fabCall" aria-label="마왕군 호출하기">🐯</button>
+</div>
+
+<nav class="nav" aria-label="메뉴">
+  <div class="nav-in" id="navBar">
+    <button data-tab="contrib" class="on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V12M12 20V5M19 20v-5"/></svg>
+      기여도 확인
+    </button>
+    <button data-tab="weekly">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+      주차별 기여도
+    </button>
+    <button data-tab="members">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2.2"/><path d="M6 16.5c.7-1.6 5.3-1.6 6 0M15 9.5h4M15 13h4"/></svg>
+      유저정보
+    </button>
+    <button data-tab="share">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6L15 12z"/></svg>
+      영상·팁
+    </button>
+    <button data-tab="board">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg>
+      건의사항
+    </button>
+  </div>
+</nav>
+
+<div id="modalRoot"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+'use strict';
+/* ================= 설정 ================= */
+const CFG = Object.assign({
+  firebase: null, kakaoJsKey: '', adminCode: '0000', openChatUrl: '',
+  clanName: '호랑이', gameName: '협동타워디펜스'
+}, (typeof window !== 'undefined' && window.SITE_CONFIG) || {});
+const PREVIEW = !!window.__PREVIEW__;
+const LIVE = !!(CFG.firebase && CFG.firebase.apiKey && !PREVIEW);
+
+/* ================= 유틸 ================= */
+const $ = (s, el) => (el || document).querySelector(s);
+const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const num = v => { const n = parseInt(String(v == null ? '' : v).replace(/[^\d-]/g, ''), 10); return isNaN(n) ? 0 : n; };
+const DOW = '일월화수목금토';
+function fmtDate(iso) {
+  if (!iso) return '-';
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d)) return iso;
+  return (d.getMonth() + 1) + '월 ' + d.getDate() + '일(' + DOW[d.getDay()] + ')';
+}
+function fmtTs(ms) {
+  if (!ms) return '';
+  const d = new Date(ms), p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+}
+function shortWeek(label) {
+  const m = /(\d+)월\s*(\d+)\s*주차/.exec(label || '');
+  return m ? m[1] + '/' + m[2] + '주' : String(label || '').slice(0, 6);
+}
+function ytId(url) {
+  const m = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{6,})/.exec(url || '');
+  return m ? m[1] : null;
+}
+function loadScript(src) {
+  return new Promise((ok, no) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = ok; s.onerror = () => no(new Error('load fail: ' + src));
+    document.head.appendChild(s);
+  });
+}
+let toastTimer = null;
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+function lsGet(k, fb) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fb; } catch (e) { return fb; } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+/* 내가 쓴 글(이 기기) 추적 — 수정/삭제 버튼 노출용 */
+const MINE_KEY = 'tg-mine-v1';
+const mine = lsGet(MINE_KEY, { comments: [], videos: [], tips: [], vcomments: [] });
+function markMine(kind, id) { (mine[kind] = mine[kind] || []).push(id); lsSet(MINE_KEY, mine); }
+function isMine(kind, id) { return (mine[kind] || []).includes(id); }
+
+/* ================= 데모 데이터 ================= */
+function demoData() {
+  const now = Date.now();
+  const M = (nick, role, lv, title, card, t) => ({ nick, role, lv, title: title || '', card: card || null, updatedAt: t || now - 86400000 });
+  const members = {};
+  [
+    M('어흥대장', '길마', 24, '숲의 지배자', {
+      avgLv: '22', mainDealer: '오깜아캣',
+      dealers: [
+        { n: '아이비', lv: '풀', lib: '풀' }, { n: '마캣', lv: '16', lib: '풀' }, { n: '오멘', lv: '16', lib: '20' },
+        { n: '깜쥐', lv: '16', lib: '16' }, { n: '빙결', lv: '16', lib: '17' }, { n: '헬기', lv: '16', lib: '11' },
+        { n: '청룡', lv: '11', lib: '10' }, { n: '부두', lv: '11', lib: '6' }
+      ]
+    }, now - 3600000 * 30),
+    M('꼬랑지', '부길마', 23, '어흥 부단장', {
+      avgLv: '21', mainDealer: '아이비',
+      dealers: [{ n: '아이비', lv: '16', lib: '18' }, { n: '오멘', lv: '15', lib: '12' }, { n: '빙결', lv: '14', lib: '9' }]
+    }, now - 3600000 * 51),
+    M('줄무늬', '마왕군원', 22), M('앞발펀치', '마왕군원', 21), M('호피', '마왕군원', 20),
+    M('냥젤리', '마왕군원', 19), M('숲의왕', '마왕군원', 18), M('아기호랑', '마왕군원', 18)
+  ].forEach(m => members[m.nick] = m);
+  const R = (b, c, w) => ({ b, c, w: w || 0 });
+  const weeks = {
+    w1: { label: '9월 3주차', base: '2026-09-14', check: '2026-09-20', createdAt: now - 86400000 * 17, rows: {
+      '어흥대장': R(520, 1180), '꼬랑지': R(480, 1100), '줄무늬': R(300, 980), '앞발펀치': R(410, 1020),
+      '호피': R(260, 870), '냥젤리': R(150, 770), '숲의왕': R(90, 700), '아기호랑': R(0, 320) } },
+    w2: { label: '9월 4주차', base: '2026-09-21', check: '2026-09-27', createdAt: now - 86400000 * 10, rows: {
+      '어흥대장': R(1180, 1840), '꼬랑지': R(1100, 1710), '줄무늬': R(980, 1500), '앞발펀치': R(1020, 1640),
+      '호피': R(870, 1150), '냥젤리': R(770, 1390), '숲의왕': R(700, 1310), '아기호랑': R(320, 930, 1) } },
+    w3: { label: '10월 1주차', base: '2026-09-28', check: '2026-10-04', createdAt: now - 86400000 * 3, rows: {
+      '어흥대장': R(1840, 2470), '꼬랑지': R(1710, 0), '줄무늬': R(1500, 2150), '앞발펀치': R(1640, 0),
+      '호피': R(1150, 0, 1), '냥젤리': R(1390, 2000), '숲의왕': R(1310, 0), '아기호랑': R(930, 0, 1) } }
+  };
+  return {
+    meta: { site: {
+      notice: '매주 일요일 21시까지 기여도 확인 부탁드려요!\n2주 연속 미달이면 경고 1회… 어흥 🐯\n신규 마왕군원은 유저정보 카드를 꼭 채워주세요.',
+      threshold: 600, callTargets: '어흥대장, 꼬랑지', updatedAt: now
+    } },
+    members, weeks,
+    comments: { c1: { text: '우리 마왕군 사이트 생긴 거 실화인가요?? 너무 좋아요~!!', ts: now - 86400000 * 2 } },
+    videos: { v1: {
+      title: '(예시) 무한 모드 120웨이브 빙결 덱', mode: '무한 모드',
+      url: 'https://youtu.be/0000000000o', nick: '어흥대장', ts: now - 86400000 * 3 } },
+    vcomments: { vc1: { vid: 'v1', nick: '냥젤리', text: '와 배치 미쳤다… 바로 따라했어요!!', ts: now - 86400000 * 2 } },
+    tips: {
+      t1: { target: '아기호랑', body: '빙결은 16까지만 먼저 올리고, 해방은 주말 2배 이벤트 때 몰아서 하는 걸 추천! 지금은 오멘 레벨업이 더 급해요.', from: '어흥대장', ts: now - 86400000 * 2 },
+      t2: { target: '전체', body: '이번 주 토벌전은 빙결 덱이 효율 최고! 배치 순서는 영상 탭 클립 참고해주세요 🐯', from: '운영진', ts: now - 86400000 * 4 }
+    },
+    calls: {}
+  };
+}
+
+/* ================= 데이터 계층 (로컬 데모 ↔ Firebase) ================= */
+const COLS = ['meta', 'members', 'weeks', 'comments', 'videos', 'vcomments', 'tips', 'calls'];
+const DB = {
+  data: {}, subs: [], fs: null, ready: false,
+  LS_KEY: 'tg-db-v1',
+  emit() { this.subs.forEach(f => { try { f(); } catch (e) { console.error(e); } }); },
+  subscribe(f) { this.subs.push(f); },
+  persist() { if (!LIVE) lsSet(this.LS_KEY, this.data); },
+  async init() {
+    COLS.forEach(c => this.data[c] = {});
+    if (LIVE) {
+      try {
+        await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
+        await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js');
+        firebase.initializeApp(CFG.firebase);
+        this.fs = firebase.firestore();
+        COLS.forEach(c => this.fs.collection(c).onSnapshot(
+          snap => { const m = {}; snap.forEach(d => m[d.id] = d.data()); this.data[c] = m; this.ready = true; this.emit(); },
+          err => { console.error(err); toast('데이터 연결 오류: ' + err.code); }
+        ));
+      } catch (e) { console.error(e); toast('Firebase 연결에 실패했어요. firebase-config.js를 확인해주세요.'); }
+    } else {
+      const saved = lsGet(this.LS_KEY, null);
+      this.data = saved && saved.members ? Object.assign(this.data, saved) : demoData();
+      COLS.forEach(c => this.data[c] = this.data[c] || {});
+      this.ready = true; this.persist(); this.emit();
+    }
+  },
+  async set(col, id, obj) {
+    if (LIVE) { try { await this.fs.collection(col).doc(id).set(obj); } catch (e) { console.error(e); toast('저장에 실패했어요 😿'); throw e; } }
+    else { this.data[col][id] = obj; this.persist(); this.emit(); }
+  },
+  async del(col, id) {
+    if (LIVE) { try { await this.fs.collection(col).doc(id).delete(); } catch (e) { console.error(e); toast('삭제에 실패했어요 😿'); throw e; } }
+    else { delete this.data[col][id]; this.persist(); this.emit(); }
+  },
+  get(col, id) { return this.data[col] ? this.data[col][id] : null; },
+  list(col) { return Object.entries(this.data[col] || {}).map(([id, v]) => Object.assign({ _id: id }, v)); }
+};
+
+/* ================= 파생 데이터 ================= */
+const site = () => DB.get('meta', 'site') || { notice: '', threshold: 600, callTargets: '' };
+const ROLE_ORDER = { '길마': 0, '부길마': 1, '마왕군원': 2, '길드원': 2 }; /* '길드원'은 예전 데이터 호환용 */
+const roster = () => DB.list('members').sort((a, b) =>
+  (ROLE_ORDER[a.role] ?? 9) - (ROLE_ORDER[b.role] ?? 9) || String(a.nick).localeCompare(String(b.nick), 'ko'));
+const weekList = () => DB.list('weeks').sort((a, b) => String(a.base).localeCompare(String(b.base)));
+const curWeek = () => { const w = weekList(); return w.length ? w[w.length - 1] : null; };
+function rowOf(week, nick) {
+  const r = (week && week.rows && week.rows[nick]) || { b: 0, c: 0, w: 0 };
+  return { b: num(r.b), c: num(r.c), w: num(r.w), diff: num(r.c) - num(r.b) };
+}
+
+/* ================= 상태 ================= */
+const S = {
+  tab: 'contrib', filter: 'all', sort: 'nick',
+  shareTab: 'videos', modeFilter: '전체', tipFilter: '전체', openCm: {},
+  admin: (() => { try { return sessionStorage.getItem('tg-admin') === '1'; } catch (e) { return false; } })()
+};
+function setAdmin(v) { S.admin = v; try { v ? sessionStorage.setItem('tg-admin', '1') : sessionStorage.removeItem('tg-admin'); } catch (e) {} }
+
+/* ================= 렌더링 ================= */
+function render() {
+  const wk = curWeek();
+  $('#hdrWeek').textContent = wk ? wk.label : '준비 중';
+  const bar = $('#demobar');
+  if (!LIVE) {
+    bar.hidden = false;
+    bar.textContent = PREVIEW
+      ? '🔍 미리보기 데모 — 데이터는 예시이고, 수정해도 이 기기에만 저장돼요'
+      : '🧪 데모 모드 — Firebase 연결(가이드 2단계) 전까지는 수정이 이 기기에만 저장돼요';
+  } else bar.hidden = true;
+  $$('#navBar button').forEach(b => b.classList.toggle('on', b.dataset.tab === S.tab));
+  const v = $('#view');
+  if (S.tab === 'contrib') v.innerHTML = viewContrib();
+  else if (S.tab === 'weekly') v.innerHTML = viewWeekly();
+  else if (S.tab === 'members') v.innerHTML = viewMembers();
+  else if (S.tab === 'share') v.innerHTML = viewShare();
+  else v.innerHTML = viewBoard();
+}
+
+/* ---------- 탭 1 : 기여도 확인 ---------- */
+function viewContrib() {
+  const wk = curWeek(), st = site(), thr = num(st.threshold);
+  const year = wk && wk.base ? String(wk.base).slice(0, 4) : new Date().getFullYear();
+  let h = `
+  <section class="hero">
+    <div class="mascot" aria-hidden="true">🐯</div>
+    <div class="greet">점검 호랑이가 어슬렁 왔습니다</div>
+    <div class="yr">${esc(year)}년</div>
+    <div class="big">${wk ? esc(wk.label) : '첫 주차를 만들어주세요'}</div>
+    <div class="quip">오늘 일퀘 다 하셨죠? 어흥!</div>
+    <div class="dates">
+      <div class="dcell"><div class="l">누적기여도 기록</div><div class="v">${wk ? fmtDate(wk.base) : '-'}</div></div>
+      <div class="dcell"><div class="l">기여도 확인</div><div class="v">${wk ? fmtDate(wk.check) : '-'}</div></div>
+    </div>
+  </section>`;
+  const calls = DB.list('calls').sort((a, b) => b.ts - a.ts);
+  if (calls.length && Date.now() - calls[0].ts < 86400000 * 3)
+    h += `<div class="callbar"><span>📣</span><div><b>${esc(calls[0].msg)}</b><br><span style="opacity:.75;font-size:11.5px">${fmtTs(calls[0].ts)} 호출</span></div></div>`;
+  if (st.notice) h += `
+  <details class="notice"><summary>📌 마왕군 공지사항 보기 <span class="arr">›</span></summary>
+    <div class="nbody">${esc(st.notice)}</div></details>`;
+  if (!wk) return h + onboardCard();
+
+  const rows = roster().map(m => { const r = rowOf(wk, m.nick); return Object.assign({ m }, r, { done: r.diff >= thr }); });
+  const doneN = rows.filter(r => r.done).length;
+  const list = rows.filter(r => S.filter === 'all' ? true : S.filter === 'done' ? r.done : !r.done);
+  if (S.sort === 'diff') list.sort((a, b) => b.diff - a.diff);
+  else if (S.sort === 'lv') list.sort((a, b) => num(b.m.lv) - num(a.m.lv));
+
+  h += `
+  <div class="chips">
+    <button class="chip ${S.filter === 'all' ? 'on' : ''}" data-act="filter" data-v="all">전체<span class="n">${rows.length}</span></button>
+    <button class="chip ${S.filter === 'done' ? 'ok-on' : ''}" data-act="filter" data-v="done">완료<span class="n">${doneN}</span></button>
+    <button class="chip ${S.filter === 'miss' ? 'bad-on' : ''}" data-act="filter" data-v="miss">미달<span class="n">${rows.length - doneN}</span></button>
+    <span class="selwrap"><label class="sr" for="sortSel">정렬</label>
+    <select class="sel" id="sortSel" data-act="sort">
+      <option value="nick" ${S.sort === 'nick' ? 'selected' : ''}>닉네임순</option>
+      <option value="diff" ${S.sort === 'diff' ? 'selected' : ''}>증가량순</option>
+      <option value="lv" ${S.sort === 'lv' ? 'selected' : ''}>Lv순</option>
+    </select></span>
+  </div>
+  <div class="tblwrap"><div class="tscroll"><table>
+    <thead><tr><th>닉네임</th><th>Lv</th><th>누적 → 확인</th><th>증가량</th><th>상태</th><th>경고</th></tr></thead>
+    <tbody>`;
+  if (!list.length) h += `<tr><td colspan="6" style="text-align:center;color:var(--text2)">해당하는 마왕군원이 없어요</td></tr>`;
+  list.forEach(r => {
+    h += `<tr class="${r.done ? 'done' : 'miss'}">
+      <td class="nick">${esc(r.m.nick)}</td>
+      <td><span class="lvb">Lv.${esc(r.m.lv)}</span></td>
+      <td class="acc">${r.b.toLocaleString()} → <b>${r.c.toLocaleString()}</b></td>
+      <td class="diff">${r.diff >= 0 ? '+' : ''}${r.diff.toLocaleString()}</td>
+      <td><span class="dot ${r.done ? 'ok' : 'bad'}"></span><span class="sr">${r.done ? '완료' : '미달'}</span></td>
+      <td>${r.w > 0 ? `<span class="warnb">${r.w}</span>` : '<span style="color:var(--text2)">-</span>'}</td>
+    </tr>`;
+  });
+  h += `</tbody></table></div></div>
+  <p class="thr">주간 기준 <b>+${thr.toLocaleString()}</b> 이상이면 완료예요 · ${esc(wk.label)} 기준</p>`;
+  return h;
+}
+function onboardCard() {
+  return `<div class="card" style="text-align:center">
+    <div style="font-size:38px">🏗️</div>
+    <h2 style="margin-top:6px">아직 준비 중이에요</h2>
+    <p class="desc">오른쪽 아래 ⚙️ 관리자 메뉴에서<br>마왕군원 명단과 첫 주차를 추가하면 시작돼요!</p></div>`;
+}
+
+/* ---------- 탭 2 : 주차별 기여도 ---------- */
+function viewWeekly() {
+  const wks = weekList().slice(-8), thr = num(site().threshold), ros = roster();
+  if (!wks.length) return onboardCard();
+  const totals = wks.map(w => {
+    let sum = 0, done = 0;
+    ros.forEach(m => { const d = rowOf(w, m.nick).diff; if (d > 0) sum += d; if (d >= thr) done++; });
+    return { w, sum, done };
+  });
+  const max = Math.max(1, ...totals.map(t => t.sum));
+  const BW = 34, GAP = 30, PAD = 18, H = 190, TOP = 26, BOT = 40;
+  const W = PAD * 2 + totals.length * (BW + GAP) - GAP;
+  let bars = '';
+  totals.forEach((t, i) => {
+    const x = PAD + i * (BW + GAP);
+    const bh = Math.max(2, (t.sum / max) * (H - TOP - BOT));
+    const y = H - BOT - bh, r = 4;
+    bars += `<g><title>${esc(t.w.label)} · 합계 +${t.sum.toLocaleString()} · 완료 ${t.done}/${ros.length}</title>
+      <path class="bar" d="M${x} ${H - BOT} L${x} ${y + r} Q${x} ${y} ${x + r} ${y} L${x + BW - r} ${y} Q${x + BW} ${y} ${x + BW} ${y + r} L${x + BW} ${H - BOT} Z"/>
+      <text class="val" x="${x + BW / 2}" y="${y - 7}" text-anchor="middle">+${t.sum >= 1000 ? (t.sum / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : t.sum}</text>
+      <text x="${x + BW / 2}" y="${H - BOT + 16}" text-anchor="middle">${esc(shortWeek(t.w.label))}</text>
+      <text x="${x + BW / 2}" y="${H - BOT + 30}" text-anchor="middle" style="font-size:10px">완료 ${t.done}명</text></g>`;
+  });
+  let h = `<div class="card">
+    <h2>주차별 마왕군 합계 📈</h2><p class="desc">주차마다 마왕군 전체가 올린 기여도 합계예요</p>
+    <div style="overflow-x:auto"><svg class="chart" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="주차별 마왕군 기여도 합계 막대그래프">
+      <line class="axis" x1="${PAD - 6}" y1="${H - BOT}" x2="${W - PAD + 6}" y2="${H - BOT}"/>${bars}</svg></div></div>`;
+
+  h += `<div class="card"><h2>마왕군원별 기록 🗂️</h2><p class="desc">주간 기준 +${thr.toLocaleString()} 이상이면 초록색!</p>
+  <div style="overflow-x:auto"><table class="mx"><thead><tr><th>닉네임</th>`;
+  wks.forEach(w => h += `<th>${esc(shortWeek(w.label))}</th>`);
+  h += `</tr></thead><tbody>`;
+  ros.forEach(m => {
+    h += `<tr><td class="nick" style="padding-left:10px">${esc(m.nick)}</td>`;
+    wks.forEach(w => {
+      const has = w.rows && w.rows[m.nick];
+      if (!has) { h += `<td><span class="cellv na">-</span></td>`; return; }
+      const d = rowOf(w, m.nick).diff;
+      h += `<td><span class="cellv ${d >= thr ? 'ok' : 'bad'}">${d >= 0 ? '+' : ''}${d.toLocaleString()}</span></td>`;
+    });
+    h += `</tr>`;
+  });
+  h += `</tbody></table></div></div>`;
+  return h;
+}
+
+/* ---------- 탭 3 : 유저정보 ---------- */
+function roleClass(role) { return role === '길마' ? 'r0' : role === '부길마' ? 'r1' : 'r2'; }
+function dispRole(role) { return role === '길드원' ? '마왕군원' : (role || '마왕군원'); } /* 예전 데이터 호환 */
+function viewMembers() {
+  const ros = roster();
+  let h = `<p class="hint" style="margin-top:16px">🪪 내 카드를 눌러서 자유롭게 입력해보세요</p>`;
+  if (!ros.length) return h + onboardCard();
+  ros.forEach(m => {
+    const c = m.card;
+    h += `<button class="mcard" data-act="editMember" data-id="${esc(m.nick)}">
+      <div class="top"><span class="nm">${esc(m.nick)}</span><span class="roleb ${roleClass(m.role)}">${esc(dispRole(m.role))}</span></div>
+      <div class="meta">🌿 Lv.${esc(m.lv)}${m.title ? ' · ⭐ ' + esc(m.title) : ''}</div>`;
+    if (c) {
+      h += `<div class="kv"><span class="k">흰마물평균Lv</span><span class="v">${esc(c.avgLv || '-')}</span></div>
+      <div class="kv"><span class="k">메인딜러</span><span class="v">${esc(c.mainDealer || '-')}</span></div>`;
+      if (c.dealers && c.dealers.length) {
+        h += `<div class="dealers">`;
+        c.dealers.forEach(d => h += `<div class="dealer"><div class="dn">${esc(d.n)}</div><div class="dl">Lv${esc(d.lv || '-')} · 해방${esc(d.lib || '-')}</div></div>`);
+        h += `</div>`;
+      }
+      h += `<div class="upd">최근 수정 · ${fmtTs(m.updatedAt)}</div>`;
+    } else {
+      h += `<div class="empty">눌러서 입력하기 ✍️</div>`;
+    }
+    h += `</button>`;
+  });
+  return h;
+}
+
+/* ---------- 탭 4 : 영상 · 팁 ---------- */
+function viewShare() {
+  let h = `<div class="subtabs">
+    <button class="${S.shareTab === 'videos' ? 'on' : ''}" data-act="shareTab" data-v="videos">🎬 플레이 영상</button>
+    <button class="${S.shareTab === 'tips' ? 'on' : ''}" data-act="shareTab" data-v="tips">💌 맞춤 팁</button>
+  </div>`;
+  if (S.shareTab === 'videos') {
+    const vids = DB.list('videos').sort((a, b) => b.ts - a.ts);
+    const modes = ['전체', ...new Set(vids.map(v => v.mode).filter(Boolean))];
+    h += `<button class="addbtn" data-act="addVideo">➕ 내 플레이 영상 공유하기</button>
+    <p class="hint">영상 파일은 유튜브에 <b>일부 공개</b>로 올린 뒤 링크를 붙여넣으면 돼요</p>`;
+    if (modes.length > 1) {
+      h += `<div class="chips">`;
+      modes.forEach(md => h += `<button class="chip ${S.modeFilter === md ? 'on' : ''}" data-act="modeFilter" data-v="${esc(md)}">${esc(md)}</button>`);
+      h += `</div>`;
+    }
+    const list = vids.filter(v => S.modeFilter === '전체' || v.mode === S.modeFilter);
+    if (!list.length) h += `<div class="emptybox"><div class="big">🎬</div>아직 공유된 영상이 없어요<br>첫 영상의 주인공이 되어보세요! 어흥</div>`;
+    list.forEach(v => {
+      const id = ytId(v.url), can = isMine('videos', v._id) || S.admin;
+      h += `<div class="pcard" data-vid="${esc(v._id)}">
+        <div class="pt">${esc(v.title)}</div>
+        <div class="pm">${v.mode ? `<span class="modeb">${esc(v.mode)}</span>` : ''}<span>${esc(v.nick || '익명')}</span><span>·</span><span>${fmtTs(v.ts)}</span>
+          ${can ? `<span class="pacts"><button class="iconb" data-act="delVideo" data-id="${esc(v._id)}" aria-label="삭제">🗑️</button></span>` : ''}</div>`;
+      if (id && !PREVIEW) {
+        h += `<button class="vthumb" data-act="playVideo" data-id="${esc(id)}" aria-label="영상 재생">
+          <img src="https://i.ytimg.com/vi/${esc(id)}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+          <span class="play">▶</span></button>`;
+      }
+      h += `<a class="linkout" href="${esc(v.url)}" target="_blank" rel="noopener">🔗 유튜브에서 보기</a>`;
+      /* 댓글 */
+      const cms = DB.list('vcomments').filter(c => c.vid === v._id).sort((a, b) => a.ts - b.ts);
+      const open = !!S.openCm[v._id];
+      h += `<div class="vcm"><button class="cmtoggle" data-act="toggleCm" data-id="${esc(v._id)}">💬 댓글 ${cms.length}개 ${open ? '접기 ▲' : '보기 ▼'}</button>`;
+      if (open) {
+        h += `<div class="cmlist">`;
+        if (!cms.length) h += `<div class="cmempty">아직 댓글이 없어요. 첫 감상평을 남겨보세요!</div>`;
+        cms.forEach(c => {
+          const canDel = isMine('vcomments', c._id) || S.admin;
+          h += `<div class="cmrow"><div class="cmtxt"><b>${esc(c.nick || '익명')}</b> · ${esc(c.text)}</div>
+            <span class="cmmeta">${fmtTs(c.ts)}${canDel ? ` <button class="cmdel" data-act="delVcm" data-id="${esc(c._id)}">삭제</button>` : ''}</span></div>`;
+        });
+        h += `<div class="cmform" data-cmv="${esc(v._id)}">
+          <input class="inp cmn" placeholder="닉네임(선택)">
+          <input class="inp cmt" placeholder="댓글 쓰기…">
+          <button class="cmgo" data-act="addVcm" data-id="${esc(v._id)}">등록</button></div></div>`;
+      }
+      h += `</div></div>`;
+    });
+  } else {
+    /* 💌 맞춤 팁 — 운영진이 마왕군원별로 남기는 코칭 공간 */
+    const ros = roster();
+    const tips = DB.list('tips').sort((a, b) => b.ts - a.ts);
+    h += S.admin
+      ? `<button class="addbtn" data-act="addTip">💌 맞춤 팁 쓰기</button>`
+      : `<p class="hint" style="margin-top:14px">💌 운영진이 마왕군원 한 명 한 명에게 남기는 맞춤 팁이에요<br>내 닉네임을 눌러 나에게 온 팁을 확인해보세요!</p>`;
+    h += `<div class="chips">`;
+    ['전체', ...ros.map(m => m.nick)].forEach(n => {
+      const c = n === '전체' ? tips.length : tips.filter(t => (t.target || '전체') === n).length;
+      h += `<button class="chip ${S.tipFilter === n ? 'on' : ''}" data-act="tipFilter" data-v="${esc(n)}">${esc(n)}${c ? `<span class="n">${c}</span>` : ''}</button>`;
+    });
+    h += `</div>`;
+    const list = tips.filter(t => S.tipFilter === '전체' || (t.target || '전체') === S.tipFilter || (t.target || '전체') === '전체');
+    if (!list.length) h += `<div class="emptybox"><div class="big">💌</div>아직 맞춤 팁이 없어요${S.admin ? '<br>첫 팁을 남겨볼까요?' : ''}</div>`;
+    list.forEach(t => {
+      h += `<div class="pcard"><div class="pm" style="margin-top:0">
+        <span class="tob">To. ${esc(t.target || '전체')}</span><span>from. ${esc(t.from || '운영진')}</span><span>·</span><span>${fmtTs(t.ts)}${t.edited ? ' (수정됨)' : ''}</span>
+        ${S.admin ? `<span class="pacts"><button class="iconb" data-act="editTip" data-id="${esc(t._id)}" aria-label="수정">✏️</button><button class="iconb" data-act="delTip" data-id="${esc(t._id)}" aria-label="삭제">🗑️</button></span>` : ''}</div>
+        <div class="pb">${esc(t.body)}</div></div>`;
+    });
+  }
+  return h;
+}
+
+/* ---------- 탭 5 : 건의사항 ---------- */
+function viewBoard() {
+  const cs = DB.list('comments').sort((a, b) => b.ts - a.ts);
+  let h = `<p class="hint" style="margin-top:16px">💬 익명으로 자유롭게 남겨주세요 · 닉네임은 기록되지 않아요</p>
+  <button class="addbtn" data-act="addComment">➕ 건의사항 작성</button>`;
+  if (!cs.length) h += `<div class="emptybox"><div class="big">💬</div>아직 건의사항이 없어요<br>마왕군에 바라는 점을 편하게 남겨주세요!</div>`;
+  cs.forEach(c => {
+    const canEdit = isMine('comments', c._id), canDel = canEdit || S.admin;
+    h += `<div class="ccard"><div class="ct">${esc(c.text)}</div>
+      <div class="cm"><span>${fmtTs(c.ts)}${c.edited ? ' (수정됨)' : ''}</span>
+      <span class="pacts">
+        ${canEdit ? `<button class="iconb" data-act="editComment" data-id="${esc(c._id)}" aria-label="수정">✏️</button>` : ''}
+        ${canDel ? `<button class="iconb" data-act="delComment" data-id="${esc(c._id)}" aria-label="삭제">🗑️</button>` : ''}
+      </span></div></div>`;
+  });
+  return h;
+}
+
+/* ================= 모달 ================= */
+function closeModal(el) { const o = el ? el.closest('.ovl') : $('#modalRoot .ovl:last-child'); if (o) o.remove(); }
+function openModal(title, bodyHtml) {
+  const o = document.createElement('div');
+  o.className = 'ovl';
+  o.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+    <div class="shd"><h3>${esc(title)}</h3><button class="x" data-close aria-label="닫기">✕</button></div>
+    <div class="sbody">${bodyHtml}</div></div>`;
+  o.addEventListener('click', e => { if (e.target === o || e.target.closest('[data-close]')) closeModal(e.target); });
+  $('#modalRoot').appendChild(o);
+  return o;
+}
+function confirmBox(msg, onYes) {
+  const o = openModal('잠깐만요 🐾', `<p style="margin:6px 0 0;font-size:14.5px">${esc(msg)}</p>
+    <div class="btnrow"><button class="btn sub" data-close>취소</button><button class="btn danger" id="cfYes">삭제</button></div>`);
+  $('#cfYes', o).onclick = () => { closeModal($('#cfYes', o)); onYes(); };
+}
+
+/* ---------- 유저정보 카드 수정 ---------- */
+function memberModal(nick) {
+  const m = DB.get('members', nick); if (!m) return;
+  const c = m.card || {};
+  const dealers = (c.dealers && c.dealers.length) ? c.dealers.slice() : [{ n: '', lv: '', lib: '' }];
+  const o = openModal(nick + ' 님의 카드', `
+    <div class="frow"><label for="mLv">대표 Lv</label><input class="inp" id="mLv" value="${esc(m.lv)}" inputmode="numeric"></div>
+    <div class="frow"><label for="mTitle">칭호 (선택)</label><input class="inp" id="mTitle" value="${esc(m.title || '')}" placeholder="예: 숲의 지배자"></div>
+    <div class="frow"><label for="mAvg">흰마물평균Lv</label><input class="inp" id="mAvg" value="${esc(c.avgLv || '')}" placeholder="예: 22"></div>
+    <div class="frow"><label for="mMain">메인딜러</label><input class="inp" id="mMain" value="${esc(c.mainDealer || '')}" placeholder="예: 오깜아캣"></div>
+    <div class="frow"><label>딜러 목록 (이름 · Lv · 해방)</label><div id="dRows"></div>
+      <button class="btn sub" id="dAdd" style="margin-top:8px;padding:9px 0;font-size:13.5px">＋ 딜러 추가</button></div>
+    <button class="btn" id="mSave">저장하기</button>`);
+  const wrap = $('#dRows', o);
+  const addRow = d => {
+    const r = document.createElement('div'); r.className = 'drow';
+    r.innerHTML = `<input class="inp" placeholder="이름" value="${esc(d.n || '')}">
+      <input class="inp" placeholder="Lv" value="${esc(d.lv || '')}">
+      <input class="inp" placeholder="해방" value="${esc(d.lib || '')}">
+      <button class="del" aria-label="딜러 삭제">✕</button>`;
+    $('.del', r).onclick = () => r.remove();
+    wrap.appendChild(r);
+  };
+  dealers.forEach(addRow);
+  $('#dAdd', o).onclick = () => addRow({});
+  $('#mSave', o).onclick = async () => {
+    const ds = $$('.drow', o).map(r => {
+      const i = $$('input', r);
+      return { n: i[0].value.trim(), lv: i[1].value.trim(), lib: i[2].value.trim() };
+    }).filter(d => d.n);
+    const upd = Object.assign({}, m, {
+      lv: $('#mLv', o).value.trim() || m.lv, title: $('#mTitle', o).value.trim(),
+      card: { avgLv: $('#mAvg', o).value.trim(), mainDealer: $('#mMain', o).value.trim(), dealers: ds },
+      updatedAt: Date.now()
+    });
+    delete upd._id;
+    await DB.set('members', nick, upd);
+    closeModal($('#mSave', o)); toast('카드를 저장했어요! 🐯');
+  };
+}
+
+/* ---------- 영상 / 팁 / 건의 작성 ---------- */
+function videoModal() {
+  const modes = [...new Set(DB.list('videos').map(v => v.mode).filter(Boolean))];
+  const o = openModal('플레이 영상 공유 🎬', `
+    <div class="frow"><label for="vT">제목</label><input class="inp" id="vT" placeholder="예: 무한 모드 120웨이브 클리어!"></div>
+    <div class="frow"><label for="vM">게임 모드</label><input class="inp" id="vM" list="modeList" placeholder="예: 무한 모드 / 토벌전 / 협동">
+      <datalist id="modeList">${modes.map(m => `<option value="${esc(m)}">`).join('')}</datalist></div>
+    <div class="frow"><label for="vU">유튜브 링크</label><input class="inp" id="vU" placeholder="https://youtu.be/..." inputmode="url"></div>
+    <div class="frow"><label for="vN">닉네임 (선택)</label><input class="inp" id="vN" placeholder="비워두면 익명"></div>
+    <p class="mnote">📱 영상 파일 올리는 법: 유튜브 앱 → ➕ 만들기 → 동영상 업로드 → 공개 범위 <b>일부 공개</b> → 업로드 후 공유 버튼으로 링크 복사!</p>
+    <button class="btn" id="vSave">공유하기</button>`);
+  $('#vSave', o).onclick = async () => {
+    const title = $('#vT', o).value.trim(), url = $('#vU', o).value.trim();
+    if (!title) return toast('제목을 입력해주세요!');
+    if (!url) return toast('유튜브 링크를 붙여넣어 주세요!');
+    const id = uid();
+    await DB.set('videos', id, { title, mode: $('#vM', o).value.trim(), url, nick: $('#vN', o).value.trim(), ts: Date.now() });
+    markMine('videos', id); closeModal($('#vSave', o)); toast('영상을 공유했어요! 🎬');
+  };
+}
+function tipModal(editId) {
+  if (!S.admin) return adminGate();
+  const old = editId ? DB.get('tips', editId) : null;
+  const ros = roster();
+  const o = openModal(editId ? '맞춤 팁 수정 💌' : '맞춤 팁 쓰기 💌', `
+    <div class="frow"><label for="tTarget">누구에게 보낼까요?</label>
+      <select class="inp" id="tTarget">
+        <option value="전체" ${old && (old.target || '전체') === '전체' ? 'selected' : ''}>전체 (모든 마왕군원)</option>
+        ${ros.map(m => `<option ${old && old.target === m.nick ? 'selected' : ''}>${esc(m.nick)}</option>`).join('')}
+      </select></div>
+    <div class="frow"><label for="tBody">내용</label><textarea class="inp" id="tBody" placeholder="예: 빙결은 16까지만 먼저 올리고, 해방은 주말 이벤트 때 몰아서 하는 걸 추천!">${esc(old ? old.body : '')}</textarea></div>
+    <div class="frow"><label for="tFrom">보내는 사람</label><input class="inp" id="tFrom" value="${esc(old ? (old.from || '운영진') : '운영진')}"></div>
+    <button class="btn" id="tSave">${editId ? '수정하기' : '팁 남기기'}</button>`);
+  $('#tSave', o).onclick = async () => {
+    const body = $('#tBody', o).value.trim();
+    if (!body) return toast('내용을 입력해주세요!');
+    const doc = { target: $('#tTarget', o).value, body, from: $('#tFrom', o).value.trim() || '운영진', ts: old ? old.ts : Date.now() };
+    if (editId) doc.edited = true;
+    await DB.set('tips', editId || uid(), doc);
+    closeModal($('#tSave', o)); toast(editId ? '수정했어요!' : '팁을 남겼어요! 💌');
+  };
+}
+function commentModal(editId) {
+  const old = editId ? DB.get('comments', editId) : null;
+  const o = openModal(editId ? '건의사항 수정' : '건의사항 작성 💬', `
+    <div class="frow"><label for="cB">내용</label><textarea class="inp" id="cB" placeholder="마왕군에 바라는 점, 하고 싶은 말을 편하게!">${esc(old ? old.text : '')}</textarea></div>
+    <p class="mnote">🕶️ 익명으로 등록돼요. 닉네임이나 계정 정보는 저장되지 않아요.</p>
+    <button class="btn" id="cSave">${editId ? '수정하기' : '등록하기'}</button>`);
+  $('#cSave', o).onclick = async () => {
+    const text = $('#cB', o).value.trim();
+    if (!text) return toast('내용을 입력해주세요!');
+    if (editId) await DB.set('comments', editId, Object.assign({}, old, { text, edited: true }));
+    else { const id = uid(); await DB.set('comments', id, { text, ts: Date.now() }); markMine('comments', id); }
+    closeModal($('#cSave', o)); toast(editId ? '수정했어요!' : '등록했어요! 💬');
+  };
+}
+
+/* ---------- 호출 (카카오톡) ---------- */
+function kakaoReady() { return !PREVIEW && CFG.kakaoJsKey && window.Kakao && window.Kakao.isInitialized(); }
+async function initKakao() {
+  if (PREVIEW || !CFG.kakaoJsKey) return;
+  try {
+    await loadScript('https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js');
+    if (!window.Kakao.isInitialized()) window.Kakao.init(CFG.kakaoJsKey);
+  } catch (e) { console.error('Kakao SDK 로드 실패', e); }
+}
+function copyText(t, okMsg) {
+  const done = () => toast(okMsg || '복사했어요!');
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => fallbackCopy(t, done));
+  else fallbackCopy(t, done);
+}
+function fallbackCopy(t, done) {
+  const ta = document.createElement('textarea');
+  ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) { toast('복사가 안 되네요 😿'); }
+  ta.remove();
+}
+const CALL_PRESETS = ['기여도 확인 마감 임박! 🔥', '주간 점검 시간이에요 ⏰', '마왕군 공지 확인해주세요 📌', '집합! 어흥!! 🐯'];
+function callModal() {
+  const targets = (site().callTargets || '').trim();
+  const o = openModal('마왕군 호출하기 🐯', `
+    ${targets ? `<p class="mnote" style="margin-top:0">📣 호출 대상: <b>${esc(targets)}</b></p>` : ''}
+    <div class="frow"><label>무슨 일로 부를까요?</label><div class="preset" id="presetRow">
+      ${CALL_PRESETS.map(p => `<button data-p="${esc(p)}">${esc(p)}</button>`).join('')}</div></div>
+    <div class="frow"><label for="callMsg">호출 메시지</label><textarea class="inp" id="callMsg" style="min-height:70px">${esc(CALL_PRESETS[0])}</textarea></div>
+    <button class="btn" id="kakaoSend">💬 카카오톡으로 알리기</button>
+    ${!kakaoReady() ? `<p class="mnote" style="text-align:center">${PREVIEW ? '카카오톡 공유는 실제 사이트에서 사용할 수 있어요' : '카카오 키를 설정하면 활성화돼요 (가이드 3단계)'}</p>` : ''}
+    <div class="btnrow">
+      <button class="btn sub" id="copyCall">메시지 복사</button>
+      ${CFG.openChatUrl ? `<a class="btn sub" href="${esc(CFG.openChatUrl)}" target="_blank" rel="noopener" style="text-decoration:none">오픈채팅 열기</a>` : ''}
+    </div>
+    <p class="mnote">호출하면 사이트 첫 화면에도 3일 동안 호출 배너가 보여요. 카카오톡 버튼은 공유 창이 열리면 마왕군 채팅방을 선택해서 보내면 돼요!</p>`);
+  $('#presetRow', o).addEventListener('click', e => {
+    const b = e.target.closest('button[data-p]'); if (!b) return;
+    $('#callMsg', o).value = b.dataset.p;
+    $$('#presetRow button', o).forEach(x => x.classList.toggle('on', x === b));
+  });
+  const logCall = msg => DB.set('calls', uid(), { msg, ts: Date.now() });
+  $('#kakaoSend', o).onclick = () => {
+    const msg = $('#callMsg', o).value.trim() || CALL_PRESETS[0];
+    if (!kakaoReady()) { toast(PREVIEW ? '미리보기에서는 카카오톡 공유를 쓸 수 없어요' : '카카오 키 설정 후 사용할 수 있어요 (가이드 3단계)'); return; }
+    try {
+      window.Kakao.Share.sendDefault({
+        objectType: 'text',
+        text: '🐯 [' + CFG.clanName + ' 마왕군 호출]\n' + msg + (targets ? '\n\n호출 대상: ' + targets : ''),
+        link: { mobileWebUrl: location.href, webUrl: location.href },
+        buttonTitle: '마왕군 사이트 열기'
+      });
+      logCall(msg); closeModal($('#kakaoSend', o));
+    } catch (e) { console.error(e); toast('카카오톡 공유에 실패했어요. 도메인 등록을 확인해주세요.'); }
+  };
+  $('#copyCall', o).onclick = () => {
+    const msg = $('#callMsg', o).value.trim() || CALL_PRESETS[0];
+    copyText('🐯 [' + CFG.clanName + ' 마왕군 호출]\n' + msg + '\n' + location.href, '복사했어요! 카톡방에 붙여넣어 주세요');
+    logCall(msg); closeModal($('#copyCall', o));
+  };
+}
+
+/* ---------- 관리자 ---------- */
+function adminGate() {
+  if (S.admin) return adminPanel();
+  const o = openModal('관리자 확인 🔐', `
+    <div class="frow"><label for="adPw">관리자 비밀번호</label><input class="inp" id="adPw" type="password" autocomplete="off"></div>
+    <button class="btn" id="adGo">확인</button>`);
+  const go = () => {
+    if ($('#adPw', o).value === String(CFG.adminCode)) { setAdmin(true); closeModal($('#adGo', o)); toast('관리자 모드 ON 🛠️'); render(); adminPanel(); }
+    else toast('비밀번호가 달라요 🙀');
+  };
+  $('#adGo', o).onclick = go;
+  $('#adPw', o).addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+  $('#adPw', o).focus();
+}
+function adminPanel() {
+  const st = site();
+  const o = openModal('관리자 메뉴 🛠️', `
+    <div class="admsec" style="border-top:none;margin-top:0;padding-top:0">
+      <h4>📌 공지 · 기준 설정</h4>
+      <div class="frow"><label for="sNotice">마왕군 공지사항</label><textarea class="inp" id="sNotice">${esc(st.notice || '')}</textarea></div>
+      <div class="frow"><label for="sThr">주간 완료 기준 (증가량)</label><input class="inp" id="sThr" inputmode="numeric" value="${esc(st.threshold ?? 600)}"></div>
+      <div class="frow"><label for="sTargets">호출 대상 (쉼표로 구분)</label><input class="inp" id="sTargets" value="${esc(st.callTargets || '')}" placeholder="예: 어흥대장, 꼬랑지"></div>
+      <button class="btn" id="sSave" style="margin-top:12px">설정 저장</button>
+    </div>
+    <div class="admsec"><h4>🐯 멤버 관리</h4><p class="small">역할·Lv 수정 후 아래 저장 버튼을 눌러주세요</p>
+      <div id="memRows"></div>
+      <div class="arow" style="margin-top:10px">
+        <input class="inp" id="newNick" placeholder="새 닉네임">
+        <select class="inp" id="newRole"><option>마왕군원</option><option>부길마</option><option>길마</option></select>
+        <input class="inp" id="newLv" placeholder="Lv" inputmode="numeric">
+        <button class="smallbtn" id="memAdd" style="color:var(--brand);border-color:var(--brand)">추가</button>
+      </div>
+      <div class="frow"><label for="bulkAdd">여러 명 한꺼번에 (한 줄에 "닉네임, Lv")</label>
+        <textarea class="inp" id="bulkAdd" style="min-height:64px" placeholder="호랑나비, 21&#10;줄무늬양말, 19"></textarea></div>
+      <div class="btnrow"><button class="btn sub" id="bulkGo">일괄 추가</button><button class="btn" id="memSave">멤버 저장</button></div>
+    </div>
+    <div class="admsec"><h4>📅 주차 관리</h4>
+      <div class="wklist" id="wkList"></div>
+      <div class="frow"><label for="nwBase">새 주차 시작일 (월요일)</label><input class="inp" id="nwBase" type="date"></div>
+      <div class="frow"><label for="nwLabel">주차 이름</label><input class="inp" id="nwLabel" placeholder="예: 10월 2주차"></div>
+      <button class="btn" id="nwGo">＋ 새 주차 만들기 (누적은 지난주 확인값으로 자동 입력)</button>
+    </div>
+    <div class="admsec"><h4>🔧 기타</h4>
+      <div class="btnrow">
+        <button class="btn sub" id="adLock">관리자 잠금</button>
+        ${!LIVE ? '<button class="btn danger" id="demoReset">데모 데이터 초기화</button>' : ''}
+      </div>
+    </div>`);
+  /* 설정 저장 */
+  $('#sSave', o).onclick = async () => {
+    await DB.set('meta', 'site', Object.assign({}, st, {
+      notice: $('#sNotice', o).value.trim(), threshold: num($('#sThr', o).value) || 600,
+      callTargets: $('#sTargets', o).value.trim(), updatedAt: Date.now()
+    }));
+    toast('설정을 저장했어요!');
+  };
+  /* 멤버 목록 */
+  const memWrap = $('#memRows', o);
+  const memRow = m => {
+    const r = document.createElement('div'); r.className = 'arow'; r.dataset.nick = m.nick;
+    r.innerHTML = `<div style="font-weight:700;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(m.nick)}</div>
+      <select class="inp rRole">${['마왕군원', '부길마', '길마'].map(x => `<option ${(m.role === x || (m.role === '길드원' && x === '마왕군원')) ? 'selected' : ''}>${x}</option>`).join('')}</select>
+      <input class="inp rLv" value="${esc(m.lv)}" inputmode="numeric">
+      <button class="smallbtn rDel" style="color:var(--bad)">삭제</button>`;
+    $('.rDel', r).onclick = () => confirmBox(m.nick + ' 님을 명단에서 삭제할까요? 지난 주차 기록은 남아있어요.', async () => { await DB.del('members', m.nick); r.remove(); toast('삭제했어요'); });
+    memWrap.appendChild(r);
+  };
+  roster().forEach(memRow);
+  const cleanNick = s => s.replace(/[\/\\]/g, ' ').trim().slice(0, 20);
+  const addMember = async (nick, role, lv) => {
+    nick = cleanNick(nick); if (!nick) return false;
+    if (DB.get('members', nick)) { toast('"' + nick + '" 님은 이미 있어요!'); return false; }
+    const m = { nick, role: role || '마왕군원', lv: num(lv) || '', title: '', card: null, updatedAt: Date.now() };
+    await DB.set('members', nick, m); memRow(m); return true;
+  };
+  $('#memAdd', o).onclick = async () => {
+    if (await addMember($('#newNick', o).value, $('#newRole', o).value, $('#newLv', o).value)) {
+      $('#newNick', o).value = ''; $('#newLv', o).value = ''; toast('추가했어요! 🐯');
+    }
+  };
+  $('#bulkGo', o).onclick = async () => {
+    const lines = $('#bulkAdd', o).value.split('\n').map(l => l.trim()).filter(Boolean);
+    let n = 0;
+    for (const l of lines) { const p = l.split(','); if (await addMember(p[0], '마왕군원', p[1])) n++; }
+    $('#bulkAdd', o).value = ''; toast(n + '명을 추가했어요! 🐯');
+  };
+  $('#memSave', o).onclick = async () => {
+    for (const r of $$('#memRows .arow', o)) {
+      const m = DB.get('members', r.dataset.nick); if (!m) continue;
+      const upd = Object.assign({}, m, { role: $('.rRole', r).value, lv: num($('.rLv', r).value) || m.lv });
+      delete upd._id;
+      await DB.set('members', r.dataset.nick, upd);
+    }
+    toast('멤버 정보를 저장했어요!');
+  };
+  /* 주차 목록 */
+  const wkWrap = $('#wkList', o);
+  weekList().slice().reverse().forEach(w => {
+    const r = document.createElement('div'); r.className = 'wkitem';
+    r.innerHTML = `<b>${esc(w.label)}</b><span style="color:var(--text2);font-size:12px">${fmtDate(w.base)} ~ ${fmtDate(w.check)}</span>
+      <button class="smallbtn wEdit">기록 입력</button><button class="smallbtn wDel" style="color:var(--bad)">삭제</button>`;
+    $('.wEdit', r).onclick = () => weekEntryModal(w._id);
+    $('.wDel', r).onclick = () => confirmBox('"' + w.label + '" 주차를 삭제할까요? 기록이 사라져요.', async () => { await DB.del('weeks', w._id); r.remove(); toast('삭제했어요'); });
+    wkWrap.appendChild(r);
+  });
+  /* 새 주차 */
+  const isoLocal = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const prev = curWeek();
+  let defBase;
+  if (prev && prev.check) { const d = new Date(prev.check + 'T00:00:00'); d.setDate(d.getDate() + 1); defBase = d; }
+  else { const d = new Date(); d.setDate(d.getDate() + ((8 - d.getDay()) % 7)); defBase = d; }
+  const baseInp = $('#nwBase', o), labelInp = $('#nwLabel', o);
+  const autoLabel = () => {
+    const d = new Date(baseInp.value + 'T00:00:00');
+    if (!isNaN(d)) labelInp.value = (d.getMonth() + 1) + '월 ' + Math.ceil(d.getDate() / 7) + '주차';
+  };
+  baseInp.value = isoLocal(defBase); autoLabel();
+  baseInp.addEventListener('change', autoLabel);
+  $('#nwGo', o).onclick = async () => {
+    const base = baseInp.value; if (!base) return toast('시작일을 선택해주세요!');
+    const label = labelInp.value.trim() || base;
+    const d = new Date(base + 'T00:00:00'); d.setDate(d.getDate() + 6);
+    const rows = {};
+    roster().forEach(m => { const pr = prev ? rowOf(prev, m.nick) : { c: 0, w: 0 }; rows[m.nick] = { b: pr.c || 0, c: 0, w: pr.w || 0 }; });
+    const id = 'wk-' + base;
+    await DB.set('weeks', id, { label, base, check: isoLocal(d), rows, createdAt: Date.now() });
+    closeModal($('#nwGo', o)); toast('"' + label + '" 주차를 만들었어요!'); weekEntryModal(id);
+  };
+  /* 기타 */
+  $('#adLock', o).onclick = () => { setAdmin(false); closeModal($('#adLock', o)); toast('관리자 잠금!'); render(); };
+  const dr = $('#demoReset', o);
+  if (dr) dr.onclick = () => confirmBox('데모 데이터를 처음 상태로 되돌릴까요?', () => {
+    try { localStorage.removeItem(DB.LS_KEY); localStorage.removeItem(MINE_KEY); } catch (e) {}
+    location.reload();
+  });
+}
+function weekEntryModal(weekId) {
+  const w = DB.get('weeks', weekId); if (!w) return;
+  const o = openModal(w.label + ' 기록 입력', `
+    <p class="mnote" style="margin-top:0">누적(월요일 기준) → 확인(일요일 기준) 수치를 입력해주세요. 증가량·상태는 자동 계산!</p>
+    <div class="wrow" style="color:var(--text2);font-size:11.5px"><span>닉네임</span><span>누적</span><span>확인</span><span>경고</span></div>
+    <div id="weRows"></div>
+    <button class="btn" id="weSave">기록 저장</button>`);
+  const wrap = $('#weRows', o);
+  roster().forEach(m => {
+    const r0 = (w.rows && w.rows[m.nick]) || { b: 0, c: 0, w: 0 };
+    const r = document.createElement('div'); r.className = 'wrow'; r.dataset.nick = m.nick;
+    r.innerHTML = `<span class="wn">${esc(m.nick)}</span>
+      <input class="inp eB" inputmode="numeric" value="${esc(r0.b ?? 0)}">
+      <input class="inp eC" inputmode="numeric" value="${esc(r0.c ?? 0)}">
+      <input class="inp eW" inputmode="numeric" value="${esc(r0.w ?? 0)}">`;
+    wrap.appendChild(r);
+  });
+  $('#weSave', o).onclick = async () => {
+    const rows = {};
+    $$('#weRows .wrow', o).forEach(r => {
+      rows[r.dataset.nick] = { b: num($('.eB', r).value), c: num($('.eC', r).value), w: num($('.eW', r).value) };
+    });
+    const upd = Object.assign({}, w, { rows }); delete upd._id;
+    await DB.set('weeks', weekId, upd);
+    closeModal($('#weSave', o)); toast('기록을 저장했어요! 📊');
+  };
+}
+
+/* ================= 이벤트 ================= */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act]'); if (!t) return;
+  const act = t.dataset.act, id = t.dataset.id;
+  if (act === 'filter') { S.filter = t.dataset.v; render(); }
+  else if (act === 'shareTab') { S.shareTab = t.dataset.v; S.modeFilter = '전체'; render(); }
+  else if (act === 'modeFilter') { S.modeFilter = t.dataset.v; render(); }
+  else if (act === 'tipFilter') { S.tipFilter = t.dataset.v; render(); }
+  else if (act === 'editMember') memberModal(id);
+  else if (act === 'addVideo') videoModal();
+  else if (act === 'addTip') tipModal();
+  else if (act === 'editTip') tipModal(id);
+  else if (act === 'toggleCm') { S.openCm[id] = !S.openCm[id]; render(); }
+  else if (act === 'addVcm') {
+    const f = t.closest('.cmform');
+    const txt = $('.cmt', f).value.trim();
+    if (!txt) return toast('댓글 내용을 입력해주세요!');
+    const cid = uid();
+    markMine('vcomments', cid);
+    DB.set('vcomments', cid, { vid: id, nick: $('.cmn', f).value.trim(), text: txt, ts: Date.now() });
+  }
+  else if (act === 'delVcm') confirmBox('이 댓글을 삭제할까요?', () => DB.del('vcomments', id));
+  else if (act === 'addComment') commentModal();
+  else if (act === 'editComment') commentModal(id);
+  else if (act === 'delComment') confirmBox('이 건의사항을 삭제할까요?', () => DB.del('comments', id));
+  else if (act === 'delVideo') confirmBox('이 영상을 삭제할까요?', () => DB.del('videos', id));
+  else if (act === 'delTip') confirmBox('이 팁을 삭제할까요?', () => DB.del('tips', id));
+  else if (act === 'expand') t.classList.toggle('clamp');
+  else if (act === 'playVideo') {
+    const box = t.closest('.vthumb') || t;
+    const vid = t.dataset.id;
+    const holder = document.createElement('div'); holder.className = 'vthumb';
+    holder.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${esc(vid)}?autoplay=1" title="플레이 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    box.replaceWith(holder);
+  }
+});
+document.addEventListener('change', e => {
+  if (e.target.matches('[data-act="sort"]')) { S.sort = e.target.value; render(); }
+});
+$('#navBar').addEventListener('click', e => {
+  const b = e.target.closest('button[data-tab]'); if (!b) return;
+  S.tab = b.dataset.tab; render(); window.scrollTo({ top: 0 });
+});
+$('#fabCall').addEventListener('click', callModal);
+$('#fabGear').addEventListener('click', adminGate);
+
+/* ================= 시작 ================= */
+DB.subscribe(render);
+(async function start() {
+  await DB.init();
+  initKakao();
+  render();
+})();
+</script>
+<!--/A:BODY-->
+</body>
+</html>
