@@ -26,7 +26,7 @@ window.SITE_CONFIG = {
   memberCode: "tiger0802",
 
   /* [4] 길드 카카오톡 오픈채팅방 링크 (있으면 붙여넣기) */
-  openChatUrl: "https://open.kakao.com/o/gIWHSvQi",
+  openChatUrl: "https://open.kakao.com/o/gwRaaNJi",
 
   /* [5] 이름 */
   clanName: "호랑이",
