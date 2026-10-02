@@ -19,7 +19,11 @@ window.SITE_CONFIG = {
   kakaoJsKey: "e65bfc218eab3729272518a6b2d9d08e",
 
   /* [3] 관리자 비밀번호 — 기여도 입력, 주차 만들기, 글 삭제에 필요 */
-  adminCode: "0802",
+  adminCode: "20261225",
+
+  /* [3-2] 멤버 비밀번호 — 마왕군원들에게 공유! (카드 수정, 영상, 댓글, 건의, 호출)
+     ""로 비워두면 예전처럼 누구나 수정 가능 */
+  memberCode: "tiger0802",
 
   /* [4] 길드 카카오톡 오픈채팅방 링크 (있으면 붙여넣기) */
   openChatUrl: "https://open.kakao.com/o/gIWHSvQi",
