@@ -19,7 +19,7 @@ window.SITE_CONFIG = {
   kakaoJsKey: "",
 
   /* [3] 관리자 비밀번호 — 기여도 입력, 주차 만들기, 글 삭제에 필요 */
-  adminCode: "0000",
+  adminCode: "0802",
 
   /* [4] 길드 카카오톡 오픈채팅방 링크 (있으면 붙여넣기) */
   openChatUrl: "",
