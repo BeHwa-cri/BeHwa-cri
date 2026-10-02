@@ -16,7 +16,7 @@ window.SITE_CONFIG = {
   },
 
   /* [2] 카카오 JavaScript 키 — 다음 단계에서 넣을 거예요 */
-  kakaoJsKey: "",
+  kakaoJsKey: "e65bfc218eab3729272518a6b2d9d08e",
 
   /* [3] 관리자 비밀번호 — 기여도 입력, 주차 만들기, 글 삭제에 필요 */
   adminCode: "0802",
